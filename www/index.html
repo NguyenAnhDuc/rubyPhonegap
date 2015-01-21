@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html ng-app="myApp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+        <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+        <link rel="stylesheet" href="styles/onsen-css-components-blue-basic-theme.css">
+
+        <script src="lib/onsen/js/angular/angular.js"></script>
+        <script src="lib/onsen/js/onsenui.js"></script>
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="app.js"></script>
+
+        <script>
+            var app = angular.module('myApp', ['onsen']);
+
+            app.controller('MyCtrl', function($scope) {
+                $scope.data = {
+                    name: '',
+                    description: ''
+                };
+
+                ons.createDialog('dialog.html').then(function(dialog) {
+                    $scope.dialog = dialog;
+                });
+
+                $scope.show = function() {
+                    $scope.dialog.show();
+                };
+
+            });
+
+        </script>
+
+        <style>
+
+        </style>
+    </head>
+
+    <body ng-controller="MyCtrl">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Dialog</div>
+        </ons-toolbar>
+
+        <div style="text-align: center">
+            <p>Name: <strong>{{ data.name || 'Unknown' }}</strong></p>
+            <p>Description: {{ data.description || 'No description yet...' }}</p>
+
+            <br />
+            <ons-button ng-click="show()">Edit</ons-button>
+        </div>
+    </ons-page>
+
+    <script type="text/ons-template" id="dialog.html">
+        <ons-dialog style="height: 50%;width: 100%;top:25%;" animation="slide" cancelable>
+                <ons-page>
+                    <ons-toolbar>
+                        <div class="center">Name</div>
+                    </ons-toolbar>
+                    <br />
+                    <div style="text-align: center">
+                        <input id="name" class="text-input" ng-model="data.name">
+                    </div>
+                </ons-page>
+        </ons-dialog>
+    </script>
+
+
+
+    </body>
+</html>
